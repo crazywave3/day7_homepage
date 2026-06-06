@@ -89,7 +89,7 @@ body{font-family:'Noto Sans KR','Apple SD Gothic Neo',sans-serif;background:var(
 /* ── 기타 제품 무한 슬라이더 ── */
 .more-products{background:var(--white);padding:80px 40px;}
 .more-slider-wrap{max-width:1100px;margin:0 auto;position:relative;overflow:hidden;}
-.more-slider-track{display:flex;gap:16px;transition:transform 0.4s ease;}
+.more-slider-track{display:flex;gap:16px;transition:transform 0.4s ease;touch-action:pan-x;user-select:none;}
 .more-slider-track img{flex-shrink:0;width:220px;height:220px;object-fit:cover;border-radius:12px;display:block;}
 .scroll-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.9);border:none;width:44px;height:44px;border-radius:50%;font-size:1.4rem;color:var(--dark-brown);cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 12px rgba(0,0,0,0.12);z-index:2;transition:background 0.2s;}
 .scroll-btn:hover{background:white;}
@@ -122,7 +122,7 @@ body{font-family:'Noto Sans KR','Apple SD Gothic Neo',sans-serif;background:var(
 @media(max-width:768px){
   .hero-desktop{display:none;}
   .hero-mobile{display:block;}
-  .intro{flex-direction:column;padding:52px 24px;gap:32px;}
+  .intro{flex-direction:column-reverse;padding:52px 24px;gap:32px;}
   .products{padding:52px 20px;}
   .product-grid{grid-template-columns:1fr;gap:24px;}
   .more-products{padding:52px 20px;}
@@ -176,7 +176,7 @@ body{font-family:'Noto Sans KR','Apple SD Gothic Neo',sans-serif;background:var(
   <div class="intro">
     <div class="intro-text">
       <h2>소매, 도매는 물론 공동구매까지!</h2>
-      <p>좋은 품질과 고객 친화적 CS로 판매자와 구매자 모두 만족할 수 있게 최선을 다하겠습니다.<br><br>스토어에 방문하여 다양한 상품 구경하시고 연락주세요.</p>
+      <p>좋은 품질과 고객 친화적 CS로 판매자와<br>구매자 모두 만족할 수 있게 최선을 다하겠습니다.<br><br>스토어에 방문하여 다양한 상품 구경하시고 연락주세요.</p>
       <div class="cta-group">
         <a class="btn btn-primary" href="https://smartstore.naver.com/daysevenmarket" target="_blank">🛒 스마트스토어 방문</a>
         <a class="btn btn-outline" href="tel:010-7344-5032">📞 010-7344-5032</a>
@@ -194,7 +194,7 @@ body{font-family:'Noto Sans KR','Apple SD Gothic Neo',sans-serif;background:var(
   <div class="section-title fade-up">
     <div class="divider"></div>
     <h2>주요 제품 라인업</h2>
-    <p>304 스테인리스 스틸, 일상을 바꾸는 주방용품</p>
+    <p>일상을 바꾸는 데이세븐 라이프웨어 스타일</p>
   </div>
   <div class="product-grid">
     <div class="product-card fade-up">
@@ -202,7 +202,7 @@ body{font-family:'Noto Sans KR','Apple SD Gothic Neo',sans-serif;background:var(
       <div class="product-info">
         <div class="product-num">01</div>
         <h3>무연마 케틀팟</h3>
-        <p>연마제를 제거할 필요 없는 304 스텐 인덕션 케틀팟. 주전자+냄비 활용 및 차망·튀김망·거름망 구성. 모든 열원에서 사용 가능한 멀티 쿡웨어.</p>
+        <p>연마제를 제거할 필요 없는 304 스텐 인덕션 케틀팟.<br>주전자+냄비 활용 및 차망·튀김망·거름망 구성으로<br>모든 열원에서 사용 가능한 멀티 쿡웨어입니다.</p>
         <a class="btn btn-primary" href="https://smartstore.naver.com/daysevenmarket/products/13469087673" target="_self">상세페이지 바로가기</a>
       </div>
     </div>
@@ -210,8 +210,8 @@ body{font-family:'Noto Sans KR','Apple SD Gothic Neo',sans-serif;background:var(
       <div class="carousel" data-index="0"><div class="carousel-track"><img class="slide-img" src="https://day7.kr/image/03_Main Product Lineup/02_Rice Washing Bowl Thumbnail Image/01.jpg" alt=""><img class="slide-img" src="https://day7.kr/image/03_Main Product Lineup/02_Rice Washing Bowl Thumbnail Image/02.jpg" alt=""><img class="slide-img" src="https://day7.kr/image/03_Main Product Lineup/02_Rice Washing Bowl Thumbnail Image/03.jpg" alt=""><img class="slide-img" src="https://day7.kr/image/03_Main Product Lineup/02_Rice Washing Bowl Thumbnail Image/04.jpg" alt=""><img class="slide-img" src="https://day7.kr/image/03_Main Product Lineup/02_Rice Washing Bowl Thumbnail Image/05.jpg" alt=""><img class="slide-img" src="https://day7.kr/image/03_Main Product Lineup/02_Rice Washing Bowl Thumbnail Image/06.jpg" alt=""><img class="slide-img" src="https://day7.kr/image/03_Main Product Lineup/02_Rice Washing Bowl Thumbnail Image/07.jpg" alt=""></div><button class="carousel-btn prev" onclick="moveCarousel(this,-1)">&#8249;</button><button class="carousel-btn next" onclick="moveCarousel(this,1)">&#8250;</button><div class="carousel-dots"><span class="dot active" onclick="goSlide(this,0)"></span><span class="dot" onclick="goSlide(this,1)"></span><span class="dot" onclick="goSlide(this,2)"></span><span class="dot" onclick="goSlide(this,3)"></span><span class="dot" onclick="goSlide(this,4)"></span><span class="dot" onclick="goSlide(this,5)"></span><span class="dot" onclick="goSlide(this,6)"></span></div></div>
       <div class="product-info">
         <div class="product-num">02</div>
-        <h3>쌀세척볼</h3>
-        <p>삶이 달라지는 304 스텐 쌀 세척볼. 쌀·채소·국수 세척은 물론 불리기까지 가능. 편리함을 극대화한 기울기와 촘촘한 타공.</p>
+        <h3>쌀 세척볼</h3>
+        <p>삶이 달라지는 304 스텐 쌀 세척볼.<br>쌀·채소·국수 세척은 물론 불리기까지 가능하며<br>편리함을 극대화한 기울기와 촘촘한 타공이 특징인<br>다용도 세척볼입니다.</p>
         <a class="btn btn-primary" href="https://smartstore.naver.com/daysevenmarket/products/12550401742" target="_self">상세페이지 바로가기</a>
       </div>
     </div>
@@ -220,7 +220,7 @@ body{font-family:'Noto Sans KR','Apple SD Gothic Neo',sans-serif;background:var(
       <div class="product-info">
         <div class="product-num">03</div>
         <h3>수세미 건조대</h3>
-        <p>수세미·주방세제·칫솔·치약 등을 위생적으로 보관하는 304 올스텐 건조대. 정밀 마감과 다각 입체 배수 구조 트레이.</p>
+        <p>수세미·주방세제·칫솔·치약 등을 위생적으로 보관할 수 있는 304 올스텐 건조대. 정밀 마감과 다각 입체 배수 구조 트레이로 물기없는 주방과 세면대를 만들어 보세요.</p>
         <a class="btn btn-primary" href="https://smartstore.naver.com/daysevenmarket/products/13548086648" target="_self">상세페이지 바로가기</a>
       </div>
     </div>
@@ -229,7 +229,7 @@ body{font-family:'Noto Sans KR','Apple SD Gothic Neo',sans-serif;background:var(
       <div class="product-info">
         <div class="product-num">04</div>
         <h3>무연마 사각 트레이+망 세트</h3>
-        <p>304 올스텐 사각 트레이+망 세트. 다양하게 활용 가능한 트레이와 물·기름 빠짐용 망. 오븐·에어프라이어·가정·업소 두루 사용.</p>
+        <p>304 올스텐 사각 트레이+망 세트.<br>다양하게 활용 가능한 트레이와 물·기름 빠짐용 망으로 구성된 사각 트레이 + 망 세트입니다. 오븐·에어프라이어 사용은 물론, 가정과 업소에서 폭 넓게 사용할 수 있습니다.</p>
         <a class="btn btn-primary" href="https://smartstore.naver.com/daysevenmarket/products/12077540340" target="_self">상세페이지 바로가기</a>
       </div>
     </div>
@@ -241,7 +241,7 @@ body{font-family:'Noto Sans KR','Apple SD Gothic Neo',sans-serif;background:var(
   <div class="section-title">
     <div class="divider"></div>
     <h2>그 외 다양한 상품</h2>
-    <p>냄비, 프라이팬, 주전자, 믹싱볼, 계량컵, 집게 등 스토어에서 만나보세요</p>
+    <p>냄비, 프라이팬, 주전자, 믹싱볼, 계량컵, 집게 등<br>다양한 제품을 스토어에서 만나보세요.</p>
   </div>
   <div class="more-slider-wrap">
     <div class="more-slider-track" id="moreTrack"><img src="https://day7.kr/image/04_Other Various Products/01.jpg" alt="제품"><img src="https://day7.kr/image/04_Other Various Products/02.jpg" alt="제품"><img src="https://day7.kr/image/04_Other Various Products/03.jpg" alt="제품"><img src="https://day7.kr/image/04_Other Various Products/04.jpg" alt="제품"><img src="https://day7.kr/image/04_Other Various Products/05.jpg" alt="제품"><img src="https://day7.kr/image/04_Other Various Products/06.jpg" alt="제품"><img src="https://day7.kr/image/04_Other Various Products/07.jpg" alt="제품"><img src="https://day7.kr/image/04_Other Various Products/08.jpg" alt="제품"><img src="https://day7.kr/image/04_Other Various Products/09.jpg" alt="제품"><img src="https://day7.kr/image/04_Other Various Products/10.jpg" alt="제품"></div>
@@ -251,7 +251,7 @@ body{font-family:'Noto Sans KR','Apple SD Gothic Neo',sans-serif;background:var(
 
 <!-- 하단 CTA -->
 <footer class="footer-cta fade-up">
-  <h2>스토어에서 다양한 상품을 만나보세요</h2>
+  <h2>스토어에서<br>다양한 상품을 만나보세요!</h2>
   <p>소매, 도매, 공동구매 문의 모두 환영합니다</p>
   <div class="cta-group">
     <a class="btn btn-white" href="https://smartstore.naver.com/daysevenmarket" target="_blank">🛒 스마트스토어 방문</a>
@@ -358,18 +358,24 @@ function goSlide(dot,idx){const c=dot.closest('.carousel');const track=c.querySe
   });
 
   // 터치 드래그 (모바일)
+  var touchStartY=0;
   track.addEventListener('touchstart',function(e){
     dragging=true;
     dragStartX=e.touches[0].clientX;
+    touchStartY=e.touches[0].clientY;
     dragStartPos=pos;
   },{passive:true});
   track.addEventListener('touchmove',function(e){
     if(!dragging)return;
     var dx=e.touches[0].clientX-dragStartX;
-    pos=dragStartPos+dx;
-    clamp();
-    track.style.transform='translateX('+pos+'px)';
-  },{passive:true});
+    var dy=e.touches[0].clientY-touchStartY;
+    if(Math.abs(dx)>Math.abs(dy)){
+      e.preventDefault();
+      pos=dragStartPos+dx;
+      clamp();
+      track.style.transform='translateX('+pos+'px)';
+    }
+  },{passive:false});
   track.addEventListener('touchend',function(){
     dragging=false;
   });
