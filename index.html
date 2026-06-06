@@ -224,9 +224,8 @@ body{font-family:'Noto Sans KR','Apple SD Gothic Neo',sans-serif;background:var(
     <p>냄비, 프라이팬, 주전자, 믹싱볼, 계량컵, 집게 등 스토어에서 만나보세요</p>
   </div>
   <div class="more-slider-wrap">
-    <button class="scroll-btn left" onclick="moreSlide(-1)">&#8249;</button>
     <div class="more-slider-track" id="moreTrack"><img src="https://day7.kr/image/04_Other Various Products/01.jpg" alt="제품"><img src="https://day7.kr/image/04_Other Various Products/02.jpg" alt="제품"><img src="https://day7.kr/image/04_Other Various Products/03.jpg" alt="제품"><img src="https://day7.kr/image/04_Other Various Products/04.jpg" alt="제품"><img src="https://day7.kr/image/04_Other Various Products/05.jpg" alt="제품"><img src="https://day7.kr/image/04_Other Various Products/06.jpg" alt="제품"><img src="https://day7.kr/image/04_Other Various Products/07.jpg" alt="제품"><img src="https://day7.kr/image/04_Other Various Products/08.jpg" alt="제품"><img src="https://day7.kr/image/04_Other Various Products/09.jpg" alt="제품"><img src="https://day7.kr/image/04_Other Various Products/10.jpg" alt="제품"></div>
-    <button class="scroll-btn right" onclick="moreSlide(1)">&#8250;</button>
+
   </div>
 </section>
 
@@ -282,49 +281,84 @@ function goSlide(dot,idx){const c=dot.closest('.carousel');const track=c.querySe
   });
 })();
 
-// 6번: 무한 슬라이더 루프 수정 (이미지 16개 기준 앞뒤 복제)
+// 무한 자동 슬라이더 + 드래그
 (function(){
   var track=document.getElementById('moreTrack');
   var imgs=Array.from(track.querySelectorAll('img'));
   var TOTAL=imgs.length;
-  var CLONE=3;
+  var GAP=16;
   var isMobile=window.innerWidth<=768;
-  var ITEM_W=isMobile?176:236; // 160px img + 16px gap / 220px img + 16px gap
+  var IMG_W=isMobile?160:220;
+  var ITEM_W=IMG_W+GAP;
 
-  // 앞뒤 복제 추가
-  for(var i=0;i<CLONE;i++){
-    var front=imgs[i].cloneNode(true);
-    var back=imgs[TOTAL-1-i].cloneNode(true);
-    track.appendChild(front);
-    track.insertBefore(back,track.firstChild);
+  // 앞뒤 복제 (무한루프용)
+  imgs.forEach(function(img){track.appendChild(img.cloneNode(true));});
+  imgs.forEach(function(img){track.insertBefore(img.cloneNode(true),track.firstChild);});
+
+  var offset=TOTAL*ITEM_W;
+  var pos=-offset;
+  var autoSpeed=0.5; // 자동 이동 속도 (px/frame)
+  var dragging=false;
+  var dragStartX=0;
+  var dragStartPos=0;
+  var animId=null;
+
+  track.style.transition='none';
+  track.style.transform='translateX('+pos+'px)';
+
+  function clamp(){
+    if(pos>-GAP){pos-=TOTAL*ITEM_W;}
+    if(pos<-(TOTAL*2*ITEM_W)){pos+=TOTAL*ITEM_W;}
   }
 
-  var cur=CLONE;
-  track.style.transition='none';
-  track.style.transform='translateX(-'+(cur*ITEM_W)+'px)';
+  function autoRun(){
+    if(!dragging){
+      pos-=autoSpeed;
+      clamp();
+      track.style.transform='translateX('+pos+'px)';
+    }
+    animId=requestAnimationFrame(autoRun);
+  }
+  autoRun();
 
-  function jump(){track.style.transition='none';track.style.transform='translateX(-'+(cur*ITEM_W)+'px)';}
-
-  window.moreSlide=function(dir){
-    cur+=dir;
-    track.style.transition='transform 0.4s ease';
-    track.style.transform='translateX(-'+(cur*ITEM_W)+'px)';
-  };
-
-  track.addEventListener('transitionend',function(){
-    if(cur>=TOTAL+CLONE){cur=CLONE;jump();}
-    if(cur<CLONE){cur=TOTAL+CLONE-1;jump();}
+  // 마우스 드래그 (데스크탑)
+  track.addEventListener('mousedown',function(e){
+    dragging=true;
+    dragStartX=e.clientX;
+    dragStartPos=pos;
+    track.style.cursor='grabbing';
+    e.preventDefault();
+  });
+  window.addEventListener('mousemove',function(e){
+    if(!dragging)return;
+    var dx=e.clientX-dragStartX;
+    pos=dragStartPos+dx;
+    clamp();
+    track.style.transform='translateX('+pos+'px)';
+  });
+  window.addEventListener('mouseup',function(){
+    dragging=false;
+    track.style.cursor='grab';
   });
 
-  // 터치 드래그 지원
-  var startX=0,moved=false;
-  track.addEventListener('touchstart',function(e){startX=e.touches[0].clientX;moved=false;},{passive:true});
-  track.addEventListener('touchmove',function(e){if(Math.abs(e.touches[0].clientX-startX)>5)moved=true;},{passive:true});
-  track.addEventListener('touchend',function(e){
-    if(!moved)return;
-    var dx=e.changedTouches[0].clientX-startX;
-    if(Math.abs(dx)>40)window.moreSlide(dx<0?1:-1);
+  // 터치 드래그 (모바일)
+  track.addEventListener('touchstart',function(e){
+    dragging=true;
+    dragStartX=e.touches[0].clientX;
+    dragStartPos=pos;
+  },{passive:true});
+  track.addEventListener('touchmove',function(e){
+    if(!dragging)return;
+    var dx=e.touches[0].clientX-dragStartX;
+    pos=dragStartPos+dx;
+    clamp();
+    track.style.transform='translateX('+pos+'px)';
+  },{passive:true});
+  track.addEventListener('touchend',function(){
+    dragging=false;
   });
+
+  track.style.cursor='grab';
 })();
 
 function copyEmail(){navigator.clipboard.writeText('managax@naver.com').then(()=>{const t=document.getElementById('toast');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);});}
